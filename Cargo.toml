@@ -1,0 +1,19 @@
+[package]
+name = "fronius-metrics"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+axum = { version = "0.7.5" , features = ["macros"] }
+eyre = "0.6.12"
+futures = "0.3.30"
+ipnetwork = "0.20.0"
+reqwest = { version = "0.12.3", features = ["json"] }
+serde = { version = "1.0.197", features = ["derive"] }
+serde_json = "1.0.115"
+serde_prometheus = "0.2.4"
+tokio = { version = "1.37.0", features = ["full"] }
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }

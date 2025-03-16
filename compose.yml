@@ -1,0 +1,54 @@
+services:
+
+  grafana:
+    image: grafana/grafana:latest
+    environment:
+      - GF_APP_MODE=development
+    networks:
+      - core
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana:/var/lib/grafana
+
+  prometheus:
+    image: prom/prometheus:v2.51.1
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --web.console.libraries=/usr/share/prometheus/console_libraries
+      - --web.console.templates=/usr/share/prometheus/consoles
+    volumes:
+      - prometheus:/prometheus
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    configs:
+      - source: prometheus
+        target: /etc/prometheus/prometheus.yml
+    networks:
+      - core
+    ports:
+      - 9090:9090
+
+  fronius-exporter:
+    build:
+      context: .
+    environment:
+      - NETWORK_CIDN=192.168.1.0/24
+      - RUST_LOG=debug
+    command:
+      - ./target/release/fronius-metrics
+    networks:
+      - core
+
+volumes:
+  grafana:
+  prometheus:
+
+networks:
+  core:
+
+configs:
+  prometheus:
+    file: ./config/prometheus.yml
