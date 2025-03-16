@@ -4,7 +4,7 @@ Allows collection of metrics from Fronius Inverters that can be collected by [Pr
 ![image](https://github.com/user-attachments/assets/a0451e0e-782e-4d5d-9472-38a489df4ebd)
 
 
-## Compatabiity
+## Compatability
 Currently only tested with a Gen 24 Primo v8.0 in a dual inveter configuration. More work will need to be done to support most setups.
 
 ## Usage
