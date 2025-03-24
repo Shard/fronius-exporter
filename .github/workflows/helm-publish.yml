@@ -53,13 +53,13 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
           VERSION=${GITHUB_REF#refs/tags/v}
-          sed -i "s/^version:.*/version: ${VERSION}/" charts/fronius-exporter/Chart.yaml
-          sed -i "s/^appVersion:.*/appVersion: ${VERSION}/" charts/fronius-exporter/Chart.yaml
+          sed -i "s/^version:.*/version: ${VERSION}/" charts/Chart.yaml
+          sed -i "s/^appVersion:.*/appVersion: ${VERSION}/" charts/Chart.yaml
       
       - name: Package Helm chart
         run: |
           mkdir -p .cr-release-packages
-          helm package charts/fronius-exporter --destination .cr-release-packages
+          helm package charts --destination .cr-release-packages
       
       - name: Upload Helm chart to GHCR
         run: |
