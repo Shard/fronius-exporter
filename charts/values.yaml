@@ -1,0 +1,49 @@
+# Default values for fronius-exporter
+replicaCount: 1
+
+image:
+  repository: ghcr.io/yourusername/fronius-exporter
+  pullPolicy: IfNotPresent
+  tag: "latest"  # Will be overridden by CI/CD
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podSecurityContext: {}
+securityContext: {}
+
+service:
+  type: ClusterIP
+  port: 8000
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+env:
+  DEFAULT_NETWORK: "192.168.1.0/24"
+  RUST_LOG: "debug"
+
+# Prometheus configuration
+prometheus:
+  enabled: false  # Set to true to deploy Prometheus alongside
+  # Additional Prometheus configuration...
+
+# Grafana configuration
+grafana:
+  enabled: false  # Set to true to deploy Grafana alongside
+  # Additional Grafana configuration...
