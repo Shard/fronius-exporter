@@ -13,12 +13,12 @@ mod tests {
     #[tokio::test]
     async fn test_get_servers_cidr_parsing() {
         // Set environment variable for testing
-        env::set_var("NETWORK_CIDR", "192.168.1.0/30");
+        env::set_var("DEFAULT_NETWORK", "192.168.1.0/30");
 
         // We need to directly test the CIDR parsing logic from get_servers()
         // For this, we'll extract the relevant parts to test
 
-        let cidr = env::var("NETWORK_CIDR").unwrap();
+        let cidr = env::var("DEFAULT_NETWORK").unwrap();
         let network = ipnetwork::Ipv4Network::from_str(&cidr).expect("Invalid CIDR format");
 
         // Assert that the network is parsed correctly
@@ -26,7 +26,7 @@ mod tests {
         assert_eq!(network.broadcast(), Ipv4Addr::new(192, 168, 1, 3));
 
         // Clean up
-        env::remove_var("NETWORK_CIDR");
+        env::remove_var("DEFAULT_NETWORK");
     }
 
     // Helper function for ip_range testing - directly copied from your implementation

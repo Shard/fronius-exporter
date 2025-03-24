@@ -35,7 +35,7 @@ services:
     build:
       context: .
     environment:
-      - NETWORK_CIDN=192.168.1.0/24
+      - DEFAULT_NETWORK=192.168.1.0/24
       - RUST_LOG=debug
     command:
       - ./target/release/fronius-metrics
