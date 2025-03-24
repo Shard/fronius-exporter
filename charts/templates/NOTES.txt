@@ -1,0 +1,17 @@
+Thank you for installing {{ .Chart.Name }}.
+
+Your release is named {{ .Release.Name }}.
+
+To get the metrics endpoint:
+  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "fronius-exporter.name" . }},app.kubernetes.io/instance={{ .Release.Name }}" -o jsonpath="{.items[0].metadata.name}")
+  export CONTAINER_PORT=$(kubectl get pod --namespace {{ .Release.Namespace }} $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+  kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8000:$CONTAINER_PORT
+  echo "Visit http://127.0.0.1:8000/metrics to see your metrics"
+
+{{- if .Values.prometheus.enabled }}
+Prometheus has been installed as part of this release.
+{{- end }}
+
+{{- if .Values.grafana.enabled }}
+Grafana has been installed as part of this release.
+{{- end }}
