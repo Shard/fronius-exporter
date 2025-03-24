@@ -24,7 +24,7 @@ fn ip_range(start: Ipv4Addr, end: Ipv4Addr) -> impl Iterator<Item = Ipv4Addr> {
 
 async fn get_servers() -> tokio::sync::watch::Receiver<Vec<SocketAddr>> {
     // Define the subnet (CIDR format)
-    let cidr = std::env::var("NETWORK_CIDN").unwrap();
+    let cidr = std::env::var("DEFAULT_NETWORK").unwrap();
 
     // Parse the network
     let network: Ipv4Network = cidr.parse().expect("Invalid CIDR format");
