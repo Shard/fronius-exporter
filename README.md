@@ -31,5 +31,5 @@ Configuration can be added to a `.env` file in the same folder as the `compose.y
 
 Only the `compose.yml` file will be required, which can instead be copied and adapted into your own grafana stack compose file.
 
-## Configuration
+## Configuration Reference
 - **DEFAULT_NETWORK**: Subnet (CIDR format) from which the application will discover and connect to Fronius inverters. Example: `192.168.0.0/24`.
