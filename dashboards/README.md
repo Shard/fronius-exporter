@@ -4,7 +4,7 @@ Contains the JSON definitions for Grafana dashboards that can be imported direct
 
 ## Available Dashboards
 
-- **fronius.json**: Dashboard for monitoring Fronius inverter metrics.
+- **fronius.json**: Dashboard for monitoring Fronius inverter metrics. Currently setup on my own dual inverter setup.
 
 ## How to Import Dashboards
 
