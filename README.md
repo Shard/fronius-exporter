@@ -37,11 +37,11 @@ Only the `compose.yml` file will be required, which can instead be copied and ad
 ### Kubernetes Helm Chart
 Fronius Exporter can be deployed on [Kubernetes](https://kubernetes.io/) using the provided [Helm](https://helm.sh/) chart. The chart is published alongside the container on GitHub Container Registry.
 
-## Prerequisites
+#### Prerequisites
 - Kubernetes cluster
 - Helm 3+ installed
 
-### Installing the Chart
+#### Installing the Chart
 Add the repository and update:
 
 ```shell
@@ -54,7 +54,7 @@ To install the chart with the release name `fronius-exporter`:
 helm install fronius-exporter fronius-exporter/fronius-exporter
 ```
 
-### Configuration Values
+#### Configuration Values
 The following table lists the configurable parameters for the fronius-exporter chart:
 
 | Parameter | Description | Default |
@@ -74,7 +74,7 @@ The following table lists the configurable parameters for the fronius-exporter c
 | `prometheus.enabled` | Deploy Prometheus alongside | `false` |
 | `grafana.enabled` | Deploy Grafana alongside | `false` |
 
-### Custom Values
+#### Custom Values
 To override default values, create a `values.yaml` file and pass it during installation:
 
 ```shell
@@ -94,7 +94,7 @@ resources:
     memory: 256Mi
 ```
 
-### Deploying with Prometheus and Grafana
+#### Deploying with Prometheus and Grafana
 You can also deploy with a built in prometheus and grafana pre-setup if you want to quickly demo it:
 
 ```yaml
