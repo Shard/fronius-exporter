@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+
+  # A simple job to scrape prometheus itself from within the container
+  - job_name: prometheus
+    scrape_interval: 30s
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Fronius Exporter
+  - job_name: fronius
+    scrape_interval:  5s
+    static_configs:
+      - targets: ['fronius-exporter:8000']
