@@ -1,0 +1,30 @@
+{
+  "common": {
+    "datestamp": "07.04.2025",
+    "timestamp": "10:49:17"
+  },
+  "inverters": [
+    {
+      "CID": 0,
+      "DT": 0,
+      "E_Total": 7865807.8833333338,
+      "ID": 1,
+      "P": 0.0
+    }
+  ],
+  "site": {
+    "BatteryStandby": false,
+    "E_Day": null,
+    "E_Total": 7865807.8833333338,
+    "E_Year": null,
+    "MLoc": 255,
+    "Mode": "produce-only",
+    "P_Akku": null,
+    "P_Grid": null,
+    "P_Load": null,
+    "P_PV": 0.0,
+    "rel_Autonomy": null,
+    "rel_SelfConsumption": null
+  },
+  "version": "12"
+}

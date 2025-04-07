@@ -1,0 +1,26 @@
+{
+	"Body" :
+	{
+		"Data" : {}
+	},
+	"Head" :
+	{
+		"Note" : "this internal API may be changed any time",
+		"RequestArguments" :
+		{
+			"method" : "GET",
+			"resource" : "BatteryManagementSystem/readable"
+		},
+		"Status" :
+		{
+			"Code" : 0,
+			"ErrorDetail" :
+			{
+				"Nodes" : []
+			},
+			"Reason" : "",
+			"UserMessage" : ""
+		},
+		"Timestamp" : "2025-04-07T10:48:04+00:00"
+	}
+}

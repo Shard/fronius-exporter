@@ -1,0 +1,33 @@
+{
+  "common": {
+    "datestamp": "07.04.2025",
+    "timestamp": "10:44:57"
+  },
+  "inverters": [
+    {
+      "BatMode": 1.0,
+      "CID": 0,
+      "DT": 0,
+      "E_Total": 9400791.8747222219,
+      "ID": 1,
+      "P": 3353.03759765625,
+      "SOC": 54.5
+    }
+  ],
+  "site": {
+    "BackupMode": false,
+    "BatteryStandby": false,
+    "E_Day": null,
+    "E_Total": 9400791.8747222219,
+    "E_Year": null,
+    "MLoc": 0,
+    "Mode": "bidirectional",
+    "P_Akku": 3423.8125,
+    "P_Grid": -54.859999999999999,
+    "P_Load": -3298.1775976562499,
+    "P_PV": 0.64302372932434082,
+    "rel_Autonomy": 100.0,
+    "rel_SelfConsumption": 98.363871611867793
+  },
+  "version": "12"
+}
