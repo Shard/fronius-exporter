@@ -39,7 +39,7 @@ jobs:
           tags: latest
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
@@ -48,3 +48,4 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          sbom: true
