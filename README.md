@@ -24,7 +24,7 @@ Alternatively, docker compose can be used to run a prometheus and grafana server
 ``` shell
 git clone git@github.com:Shard/fronius-exporter.git
 cd fronius-exporter
-docker compose up -d
+docker compose up -d --build
 ```
 
 Simply visit http://localhost:3000 to visit the local grafana, or http://localhost:9090 to inspect prometheus directly. The logs for fronius exporter can be checked with `docker compose logs fronius-exporter`.
