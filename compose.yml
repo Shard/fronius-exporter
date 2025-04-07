@@ -37,10 +37,10 @@ services:
     environment:
       - DEFAULT_NETWORK=192.168.1.0/24
       - RUST_LOG=debug
-    command:
-      - ./target/release/fronius-metrics
     networks:
       - core
+    ports:
+      - 8000:8000
 
 volumes:
   grafana:
