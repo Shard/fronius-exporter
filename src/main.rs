@@ -63,6 +63,7 @@ async fn get_servers() -> tokio::sync::watch::Receiver<Vec<SocketAddr>> {
             resp.remote_addr()
         })
         .collect();
+        tracing::event!(tracing::Level::INFO, "Found inverters: {:?}", &results);
         send.send(results).unwrap();
         sleep(std::time::Duration::from_secs(60 * 5)).await;
     });
@@ -80,15 +81,13 @@ async fn main() {
     tracing_subscriber::fmt()
         .with_env_filter(EnvFilter::from_default_env())
         .init();
-    println!("🚀 Fronius-exporter is starting..");
-    tracing::event!(tracing::Level::DEBUG, "Finding inverters");
+    tracing::event!(tracing::Level::INFO, "🔍 Serching for inverters");
     let addrs = get_servers().await;
-    tracing::event!(tracing::Level::DEBUG, "Found inverters: {:?}", &addrs);
     let app = axum::Router::new()
         .route("/metrics", get(metrics))
         .with_state(addrs);
     let listener = tokio::net::TcpListener::bind("0.0.0.0:8000").await.unwrap();
-    tracing::event!(tracing::Level::DEBUG, "Starting metrics endpoint");
+    tracing::event!(tracing::Level::INFO, "Starting metrics endpoint on http://0.0.0.0:8000");
     axum::serve(listener, app).await.unwrap();
 }
 
