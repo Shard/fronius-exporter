@@ -1,6 +1,7 @@
-FROM rust:latest as builder
+FROM rust:1.86 AS builder
 WORKDIR /opt/fronius/
-COPY . .
+COPY Cargo.toml .
+COPY src ./src
 RUN cargo build --release
 
 FROM debian:bookworm-slim
