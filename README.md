@@ -12,7 +12,7 @@ Currently only tested with a Gen 24 Primo v8.0 in a dual inveter configuration. 
 To get started quickly, you can use Docker to run fronius-exporter locally:
 ```
 docker run --rm \
-  -p 3000:3000 \
+  -p 8000:8000 \
   ghcr.io/shard/fronius-exporter:latest
 ```
 This will run just the fronius-exporter metrics endpoint on [localhost:8000](http://localhost:8000/metrics).
