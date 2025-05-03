@@ -12,7 +12,7 @@ Currently only tested with a Gen 24 Primo v8.0 in a dual inveter configuration. 
 To get started quickly, you can use Docker to run fronius-exporter locally:
 ```
 docker run --rm \
-  -p 3000:3000 \
+  -p 8000:8000 \
   ghcr.io/shard/fronius-exporter:latest
 ```
 This will run just the fronius-exporter metrics endpoint on [localhost:8000](http://localhost:8000/metrics).
@@ -24,10 +24,10 @@ Alternatively, docker compose can be used to run a prometheus and grafana server
 ``` shell
 git clone git@github.com:Shard/fronius-exporter.git
 cd fronius-exporter
-docker compose up -d
+docker compose up -d --build
 ```
 
-Simply visit http://localhost:3000 to visit the local grafana, or http://localhost:9090 to inspect prometheus directly. The logs for fronius exporter can be checked with `docker compose logs fronius-exporter`.
+Simply visit http://localhost:8000 to visit the local grafana, or http://localhost:9090 to inspect prometheus directly. The logs for fronius exporter can be checked with `docker compose logs fronius-exporter`.
 
 Configuration can be added to a `.env` file in the same folder as the `compose.yml` file using standard env format (`KEY=VALUE`).
 
