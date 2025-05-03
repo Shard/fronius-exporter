@@ -1,0 +1,126 @@
+{
+	"Body" :
+	{
+		"Data" :
+		{
+			"393216" :
+			{
+				"attributes" :
+				{
+					"[ENABLE]" : "true",
+					"[VISIBLE]" : "true",
+					"createTS" : "1741635558",
+					"inverter.devicetree" : "{\"addr\":\"wayn\",\"if\":\"can\",\"inverter\":{\"uid\":\"16777215\"},\"inverter.attr.0\":\"\",\"inverter.attr.1\":\"4,210,145\",\"modules\":{\"CTRL\":{\"pmc-index\":0,\"rev-hw\":\"0.0.0.0\",\"rev-sw\":\"\",\"uid\":\"16777215\"},\"PS\":{\"pmc-index\":1,\"rev-hw\":\"4,071,593|2.4,071,779|1.0.0\",\"rev-sw\":\"2.33.3.19055\"},\"PS2\":{\"pmc-index\":2,\"rev-hw\":\"4,071,593|2.4,071,779|1.0.0\",\"rev-sw\":\"2.24.3.12640\"}},\"name\":\"PrePilot X.X-YM\",\"rev\":\"0.0.0\"}\n",
+					"inverter.devicetype" : "0",
+					"inverter.nodetype" : "97",
+					"inverter.pmc.0" : "",
+					"inverter.pmc.1" : "34349501700005987|4,071,779|0.2A_B|ROX-L|R|\n34341005266770043|4,071,593|1.1F__|1PN6K|R|\n",
+					"inverter.pmc.2" : "34349501700005987|4,071,779|0.2A_B|ROX-L|R|\n34341005266770043|4,071,593|1.1F__|1PN6K|R|\n",
+					"note" : "dataexchange"
+				},
+				"channels" :
+				{
+					"<1090584584>" : 6344926253.0,
+					"<1107361800>" : 0.0,
+					"<1124139016>" : 0.0,
+					"<1140916232>" : 483331.0,
+					"<1157693448>" : 0.0,
+					"<1174470664>" : 0.0,
+					"<1208025096>" : 0.0,
+					"<1224802312>" : 0.0,
+					"<1241579528>" : 0.0,
+					"<1258356744>" : 0.0,
+					"<1275133960>" : 0.0,
+					"<1291911176>" : 0.0,
+					"<1308688392>" : 0.0,
+					"<1325465608>" : 0.0,
+					"<1342242824>" : 0.0,
+					"<1359020040>" : 0.0,
+					"<1375797256>" : 0.0,
+					"<1392574472>" : 0.0,
+					"<1409351876>" : 14668318.0,
+					"<2197881028>" : 3.0,
+					"<2214658244>" : 2.0,
+					"<2231435460>" : 4.0,
+					"<2231566532>" : 350.0,
+					"<2315517954>" : 1.0,
+					"<2349006852>" : 378.0,
+					"<2365784260>" : 347.42160034179688,
+					"<2382561476>" : 125.99142456054688,
+					"<2399338692>" : 259.03607177734375,
+					"<2500001988>" : 15.211337089538574,
+					"<2516779204>" : 0.0,
+					"<2533556420>" : 21.304668426513672,
+					"<2550333636>" : 0.0,
+					"<2567110852>" : 54.296722412109375,
+					"<604242116>" : 60.879180908203125,
+					"<939589828>" : 34643.0,
+					"<973144260>" : 14668318.0,
+					"ACBRIDGE_CURRENT_ACTIVE_MEAN_01_F32" : 0.0,
+					"ACBRIDGE_ENERGYACTIVE_ACTIVECONSUMED_SUM_01_U64" : 53.0,
+					"ACBRIDGE_ENERGYACTIVE_ACTIVECONSUMED_SUM_02_U64" : 0.0,
+					"ACBRIDGE_ENERGYACTIVE_ACTIVECONSUMED_SUM_03_U64" : 0.0,
+					"ACBRIDGE_ENERGYACTIVE_PRODUCED_SUM_01_U64" : 28316908380.0,
+					"ACBRIDGE_ENERGYACTIVE_PRODUCED_SUM_02_U64" : 0.0,
+					"ACBRIDGE_ENERGYACTIVE_PRODUCED_SUM_03_U64" : 0.0,
+					"ACBRIDGE_POWERACTIVE_MEAN_01_F32" : 0.0,
+					"ACBRIDGE_POWERACTIVE_SUM_MEAN_F32" : 0.0,
+					"ACBRIDGE_POWERAPPARENT_MEAN_01_F32" : 0.0,
+					"ACBRIDGE_POWERAPPARENT_SUM_MEAN_F32" : 0.0,
+					"ACBRIDGE_POWERREACTIVE_MEAN_01_F32" : 0.0,
+					"ACBRIDGE_POWERREACTIVE_SUM_MEAN_F32" : 0.0,
+					"ACBRIDGE_TIME_BACKUPMODE_UPTIME_SUM_F32" : 0.0,
+					"BAT_ENERGYACTIVE_ACTIVECHARGE_SUM_01_U64" : 0.0,
+					"BAT_ENERGYACTIVE_ACTIVEDISCHARGE_SUM_01_U64" : 0.0,
+					"BAT_MODE_ENFORCED_U16" : 2.0,
+					"BAT_VOLTAGE_OUTER_MEAN_01_F32" : 0.82448577880859375,
+					"COMPONENTS_MODE_ENABLE_U16" : 1.0,
+					"COMPONENTS_MODE_VISIBLE_U16" : 1.0,
+					"COMPONENTS_TIME_STAMP_U64" : 1744023016.0,
+					"DCLINK_VOLTAGE_MEAN_F32" : 134.48529052734375,
+					"DEVICE_MODE_OPERATING_REFERRAL_U16" : 0.0,
+					"DEVICE_TEMPERATURE_AMBIENTEMEAN_F32" : 38.391845703125,
+					"DEVICE_TIME_UPTIME_SUM_F32" : 30876600.0,
+					"FANCONTROL_PERCENT_01_F32" : 0.0,
+					"FANCONTROL_PERCENT_02_F32" : 0.0,
+					"FEEDINPOINT_FREQUENCY_MEAN_F32" : 49.984165191650391,
+					"FEEDINPOINT_VOLTAGE_MEAN_01_F32" : 236.61585998535156,
+					"INVERTER_VALUE_SYNCHRONISATION_BITMAP_U16" : 0.0,
+					"ISO_RESISTANCE_MEAN_F32" : 6408354.0,
+					"LEGACY_MODE_BACKUP_OPERATION_SYNC_DM_SYSTEMS_U16" : 0.0,
+					"MODULE_TEMPERATURE_MEAN_01_F32" : 26.146881103515625,
+					"MODULE_TEMPERATURE_MEAN_03_F32" : 26.03741455078125,
+					"MODULE_TEMPERATURE_MEAN_04_F32" : 26.124969482421875,
+					"PV_CURRENT_MEAN_01_F32" : 0.0,
+					"PV_CURRENT_MEAN_02_F32" : 0.0,
+					"PV_ENERGYACTIVE_ACTIVE_SUM_01_U64" : 11779752531.0,
+					"PV_ENERGYACTIVE_ACTIVE_SUM_02_U64" : 17892967360.0,
+					"PV_POWERACTIVE_MEAN_01_F32" : 0.0,
+					"PV_POWERACTIVE_MEAN_02_F32" : 0.0,
+					"PV_VOLTAGE_MEAN_01_F32" : 2.4149904251098633,
+					"PV_VOLTAGE_MEAN_02_F32" : 2.5800330638885498
+				}
+			}
+		}
+	},
+	"Head" :
+	{
+		"Note" : "this internal API may be changed any time",
+		"RequestArguments" :
+		{
+			"method" : "GET",
+			"resource" : "cache/readable"
+		},
+		"Status" :
+		{
+			"Code" : 0,
+			"ErrorDetail" :
+			{
+				"Nodes" : []
+			},
+			"Reason" : "",
+			"UserMessage" : ""
+		},
+		"Timestamp" : "2025-04-07T10:50:17+00:00"
+	}
+}
