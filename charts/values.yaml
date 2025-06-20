@@ -2,7 +2,7 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/yourusername/fronius-exporter
+  repository: ghcr.io/shard/fronius-exporter
   pullPolicy: IfNotPresent
   tag: "latest"  # Will be overridden by CI/CD
 
