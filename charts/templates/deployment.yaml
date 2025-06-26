@@ -38,13 +38,13 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /metrics
+              path: /health
               port: metrics
             initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
             httpGet:
-              path: /metrics
+              path: /health
               port: metrics
             initialDelaySeconds: 5
             periodSeconds: 10

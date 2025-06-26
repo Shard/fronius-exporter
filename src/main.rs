@@ -1,4 +1,3 @@
-use eyre::Result;
 use std::net::{Ipv4Addr, SocketAddr};
 use tracing_subscriber::EnvFilter;
 
@@ -71,11 +70,6 @@ async fn get_servers() -> tokio::sync::watch::Receiver<Vec<SocketAddr>> {
     recv
 }
 
-#[derive(Clone)]
-struct MetricsState {
-    addresses: Vec<SocketAddr>,
-}
-
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt()
@@ -85,6 +79,7 @@ async fn main() {
     let addrs = get_servers().await;
     let app = axum::Router::new()
         .route("/metrics", get(metrics))
+        .route("/health", get(health))
         .with_state(addrs);
     let listener = tokio::net::TcpListener::bind("0.0.0.0:8000").await.unwrap();
     tracing::event!(tracing::Level::INFO, "Starting metrics endpoint on http://0.0.0.0:8000");
@@ -140,9 +135,19 @@ fn format_metrics(m: &Metrics, name: &str) -> String {
     )
 }
 
+async fn health() -> &'static str {
+    "OK"
+}
+
 #[axum::debug_handler]
 async fn metrics(addrs: State<tokio::sync::watch::Receiver<Vec<SocketAddr>>>) -> String {
     let dat = addrs.borrow().clone();
+    
+    if dat.is_empty() {
+        tracing::event!(tracing::Level::WARN, "No inverters discovered yet, returning empty metrics");
+        return String::new();
+    }
+    
     let results: Vec<Metrics> = join_all(dat.iter().map(|a| scrape(*a))).await;
     format!(
         "{}{}",
