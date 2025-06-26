@@ -35,36 +35,38 @@ async fn get_servers() -> tokio::sync::watch::Receiver<Vec<SocketAddr>> {
     let (send, recv) = tokio::sync::watch::channel(vec![]);
 
     tokio::task::spawn(async move {
-        // Iterate over all the IP addresses in the subnet
-        let results: Vec<SocketAddr> = join_all(
-            ip_range(start_ip, end_ip)
-                .filter(|ip| *ip != network.network() && *ip != network.broadcast())
-                .map(|ip_addr| {
-                    reqwest::get(format!(
-                        "http://{ip_addr}/components/BatteryManagementSystem/readable",
-                    ))
-                }),
-        )
-        .await
-        .iter()
-        .filter_map(|resp| {
-            let Ok(resp) = resp else {
-                return None;
-            };
-            if resp.status() != 200 {
-                return None;
-            }
-            if resp.headers().get(HeaderName::from_static("content-type"))
-                != Some(&HeaderValue::from_static("text/javascript"))
-            {
-                return None;
-            }
-            resp.remote_addr()
-        })
-        .collect();
-        tracing::event!(tracing::Level::INFO, "Found inverters: {:?}", &results);
-        send.send(results).unwrap();
-        sleep(std::time::Duration::from_secs(60 * 5)).await;
+        loop {
+            // Iterate over all the IP addresses in the subnet
+            let results: Vec<SocketAddr> = join_all(
+                ip_range(start_ip, end_ip)
+                    .filter(|ip| *ip != network.network() && *ip != network.broadcast())
+                    .map(|ip_addr| {
+                        reqwest::get(format!(
+                            "http://{ip_addr}/components/BatteryManagementSystem/readable",
+                        ))
+                    }),
+            )
+            .await
+            .iter()
+            .filter_map(|resp| {
+                let Ok(resp) = resp else {
+                    return None;
+                };
+                if resp.status() != 200 {
+                    return None;
+                }
+                if resp.headers().get(HeaderName::from_static("content-type"))
+                    != Some(&HeaderValue::from_static("text/javascript"))
+                {
+                    return None;
+                }
+                resp.remote_addr()
+            })
+            .collect();
+            tracing::event!(tracing::Level::INFO, "Found inverters: {:?}", &results);
+            send.send(results).unwrap();
+            sleep(std::time::Duration::from_secs(60 * 5)).await;
+        }
     });
 
     recv
@@ -78,9 +80,12 @@ async fn main() {
     tracing::event!(tracing::Level::INFO, "🔍 Serching for inverters");
     let addrs = get_servers().await;
     let app = axum::Router::new()
-        .route("/metrics", get(metrics))
         .route("/health", get(health))
-        .with_state(addrs);
+        .merge(
+            axum::Router::new()
+                .route("/metrics", get(metrics))
+                .with_state(addrs)
+        );
     let listener = tokio::net::TcpListener::bind("0.0.0.0:8000").await.unwrap();
     tracing::event!(tracing::Level::INFO, "Starting metrics endpoint on http://0.0.0.0:8000");
     axum::serve(listener, app).await.unwrap();
