@@ -296,6 +296,7 @@ dependencies = [
  "serde_json",
  "serde_prometheus",
  "tokio",
+ "tower",
  "tracing",
  "tracing-subscriber",
 ]

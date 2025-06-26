@@ -1,8 +1,7 @@
 #[cfg(test)]
 mod tests {
     use std::env;
-    use std::net::{Ipv4Addr, SocketAddr};
-    use std::time::Duration;
+    use std::net::Ipv4Addr;
 
     // These would normally be imported from your crate
     // use your_crate::get_servers;
@@ -64,12 +63,4 @@ mod tests {
     // Additional helper for testing in the future:
     use std::str::FromStr;
 
-    // This is a setup for more comprehensive tests later
-    fn setup_test_environment(cidr: &str) -> (ipnetwork::Ipv4Network, Ipv4Addr, Ipv4Addr) {
-        let network = ipnetwork::Ipv4Network::from_str(cidr).expect("Invalid CIDR format");
-        let start_ip = network.network();
-        let end_ip = network.broadcast();
-
-        (network, start_ip, end_ip)
-    }
 }
