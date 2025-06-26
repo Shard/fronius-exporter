@@ -36,14 +36,24 @@ async fn get_servers() -> tokio::sync::watch::Receiver<Vec<SocketAddr>> {
 
     tokio::task::spawn(async move {
         loop {
+            tracing::event!(tracing::Level::INFO, "Starting network scan for inverters");
+            let ips: Vec<_> = ip_range(start_ip, end_ip)
+                .filter(|ip| *ip != network.network() && *ip != network.broadcast())
+                .collect();
+            let total_ips = ips.len();
+            tracing::event!(tracing::Level::INFO, "Scanning {} IP addresses", total_ips);
+            
             // Iterate over all the IP addresses in the subnet
             let results: Vec<SocketAddr> = join_all(
-                ip_range(start_ip, end_ip)
-                    .filter(|ip| *ip != network.network() && *ip != network.broadcast())
-                    .map(|ip_addr| {
-                        reqwest::get(format!(
+                ips.into_iter()
+                    .map(|ip_addr| async move {
+                        let client = reqwest::Client::builder()
+                            .timeout(std::time::Duration::from_secs(2))
+                            .build()
+                            .unwrap();
+                        client.get(format!(
                             "http://{ip_addr}/components/BatteryManagementSystem/readable",
-                        ))
+                        )).send().await
                     }),
             )
             .await
@@ -63,8 +73,9 @@ async fn get_servers() -> tokio::sync::watch::Receiver<Vec<SocketAddr>> {
                 resp.remote_addr()
             })
             .collect();
-            tracing::event!(tracing::Level::INFO, "Found inverters: {:?}", &results);
+            tracing::event!(tracing::Level::INFO, "Scan complete. Found {} inverters: {:?}", results.len(), &results);
             send.send(results).unwrap();
+            tracing::event!(tracing::Level::INFO, "Waiting 5 minutes before next scan");
             sleep(std::time::Duration::from_secs(60 * 5)).await;
         }
     });
@@ -77,8 +88,12 @@ async fn main() {
     tracing_subscriber::fmt()
         .with_env_filter(EnvFilter::from_default_env())
         .init();
-    tracing::event!(tracing::Level::INFO, "🔍 Serching for inverters");
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:8000").await.unwrap();
+    tracing::event!(tracing::Level::INFO, "Starting metrics endpoint on http://0.0.0.0:8000");
+    
+    tracing::event!(tracing::Level::INFO, "🔍 Starting background inverter discovery");
     let addrs = get_servers().await;
+    
     let app = axum::Router::new()
         .route("/health", get(health))
         .merge(
@@ -86,8 +101,7 @@ async fn main() {
                 .route("/metrics", get(metrics))
                 .with_state(addrs)
         );
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:8000").await.unwrap();
-    tracing::event!(tracing::Level::INFO, "Starting metrics endpoint on http://0.0.0.0:8000");
+    
     axum::serve(listener, app).await.unwrap();
 }
 
