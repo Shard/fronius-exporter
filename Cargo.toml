@@ -6,16 +6,23 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-axum = { version = "0.7.5" , features = ["macros"] }
+axum = { version = "0.7.5", features = ["macros"] }
+clap = { version = "4.5.40", features = ["derive"] }
 eyre = "0.6.12"
 futures = "0.3.30"
 ipnetwork = "0.20.0"
+opentelemetry = "0.30.0"
+opentelemetry-otlp = { version = "0.30.0", features = ["trace"] }
+opentelemetry-stdout = "0.30.0"
+opentelemetry_sdk = "0.30.0"
 reqwest = { version = "0.12.3", features = ["json"] }
 serde = { version = "1.0.197", features = ["derive"] }
 serde_json = "1.0.115"
 serde_prometheus = "0.2.4"
 tokio = { version = "1.37.0", features = ["full"] }
-tracing = "0.1.40"
+tower-http = { version = "0.6.6", features = ["trace", "tracing"] }
+tracing = { version = "0.1.40", features = ["attributes"] }
+tracing-opentelemetry = "0.31.0"
 tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
 
 [dev-dependencies]
