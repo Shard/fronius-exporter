@@ -2,8 +2,8 @@ apiVersion: v2
 name: fronius-exporter
 description: A Helm chart for Fronius Exporter that collects metrics from Fronius Inverters for Prometheus
 type: application
-version: 0.1.6
-appVersion: 0.1.0
+version: 0.1.8
+appVersion: 0.1.7
 keywords:
   - fronius
   - prometheus
