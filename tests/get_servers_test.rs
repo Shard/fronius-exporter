@@ -33,7 +33,7 @@ mod tests {
         let start_u32 = u32::from(start);
         let end_u32 = u32::from(end);
 
-        (start_u32..=end_u32).map(|ip_u32| Ipv4Addr::from(ip_u32))
+        (start_u32..=end_u32).map(Ipv4Addr::from)
     }
 
     #[test]
@@ -62,5 +62,4 @@ mod tests {
 
     // Additional helper for testing in the future:
     use std::str::FromStr;
-
 }
