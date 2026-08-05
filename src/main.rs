@@ -4,7 +4,7 @@ use opentelemetry_otlp::{Protocol, SpanExporter, WithExportConfig};
 use opentelemetry_sdk::trace::SdkTracerProvider;
 use std::net::{Ipv4Addr, SocketAddr};
 use tower_http::trace::TraceLayer;
-use tracing::{instrument, Instrument, Level};
+use tracing::{instrument, Instrument};
 use tracing_opentelemetry::OpenTelemetryLayer;
 use tracing_subscriber::{fmt, layer::SubscriberExt, util::SubscriberInitExt, EnvFilter};
 
@@ -25,7 +25,7 @@ fn ip_range(start: Ipv4Addr, end: Ipv4Addr) -> impl Iterator<Item = Ipv4Addr> {
     let start_u32 = u32::from(start);
     let end_u32 = u32::from(end);
 
-    (start_u32..=end_u32).map(|ip_u32| Ipv4Addr::from(ip_u32))
+    (start_u32..=end_u32).map(Ipv4Addr::from)
 }
 
 #[instrument]
@@ -38,8 +38,8 @@ async fn spawn_scanner(
     let network: Ipv4Network = cidr.parse().expect("Invalid CIDR format");
 
     // Get the starting IP address of the network and the number of addresses in the subnet
-    let start_ip = network.network().clone();
-    let end_ip = network.broadcast().clone();
+    let start_ip = network.network();
+    let end_ip = network.broadcast();
 
     let (send, recv) = tokio::sync::watch::channel(vec![]);
     let client = reqwest::Client::builder()
@@ -89,7 +89,7 @@ async fn spawn_scanner(
                 }))
                 .await
                 .into_iter()
-                .filter_map(|r| r)
+                .flatten()
                 .collect();
                 tracing::info!(
                     "Scan complete. Found {} inverters: {:?}",
@@ -196,10 +196,10 @@ fn format_metrics(m: &Metrics, name: &str) -> String {
     let labels = [("name", name)];
     format!(
         "{}{}{}{}",
-        serde_prometheus::to_string(&m.batman, None, &labels).unwrap(),
-        serde_prometheus::to_string(&m.cache, None, &labels).unwrap(),
-        serde_prometheus::to_string(&m.powerflow, None, &labels).unwrap(),
-        serde_prometheus::to_string(&m.powerflow2, None, &labels).unwrap()
+        serde_prometheus::to_string(&m.batman, None, labels).unwrap(),
+        serde_prometheus::to_string(&m.cache, None, labels).unwrap(),
+        serde_prometheus::to_string(&m.powerflow, None, labels).unwrap(),
+        serde_prometheus::to_string(&m.powerflow2, None, labels).unwrap()
     )
 }
 
